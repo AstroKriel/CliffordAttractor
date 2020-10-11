@@ -1,0 +1,22 @@
+Finished program.
+==14972== Profiling application: program.exe
+==14972== Profiling result:
+            Type  Time(%)      Time     Calls       Avg       Min       Max  Name
+ GPU activities:   88.94%  80.095ms         1  80.095ms  80.095ms  80.095ms  calcDensity_GPU(double, double, double, double, double*, double*, int, int, int*)
+                   10.48%  9.4405ms         3  3.1468ms  1.2332ms  4.5870ms  [CUDA memcpy HtoD]
+                    0.58%  518.87us         1  518.87us  518.87us  518.87us  [CUDA memcpy DtoH]
+      API calls:   53.43%  143.66ms         3  47.886ms  446.60us  142.71ms  cudaMalloc
+                   29.90%  80.396ms         1  80.396ms  80.396ms  80.396ms  cudaDeviceSynchronize
+                   14.47%  38.921ms         1  38.921ms  38.921ms  38.921ms  cuDevicePrimaryCtxRelease
+                    1.81%  4.8578ms         4  1.2145ms  708.10us  1.8875ms  cudaMemcpy
+                    0.15%  394.00us         3  131.33us  91.500us  195.80us  cudaFree
+                    0.12%  311.80us        97  3.2140us     100ns  208.70us  cuDeviceGetAttribute
+                    0.09%  234.00us         2  117.00us  54.900us  179.10us  cuModuleUnload
+                    0.03%  89.600us         1  89.600us  89.600us  89.600us  cudaLaunchKernel
+                    0.01%  18.100us         1  18.100us  18.100us  18.100us  cuDeviceTotalMem
+                    0.00%  7.1000us         1  7.1000us  7.1000us  7.1000us  cuDeviceGetPCIBusId
+                    0.00%  1.7000us         3     566ns     200ns     800ns  cuDeviceGetCount
+                    0.00%  1.5000us         2     750ns     300ns  1.2000us  cuDeviceGet
+                    0.00%     600ns         1     600ns     600ns     600ns  cuDeviceGetName
+                    0.00%     600ns         1     600ns     600ns     600ns  cuDeviceGetLuid
+                    0.00%     400ns         1     400ns     400ns     400ns  cuDeviceGetUuid
