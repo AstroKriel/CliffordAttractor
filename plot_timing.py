@@ -36,6 +36,8 @@ plt.ylabel('Speedup')
 plt.savefig('plot_speedup.png')
 plt.close()
 
+np.set_printoptions(suppress=True)
+
 ##############################################
 ## SCALING PLOT
 ##############################################
@@ -46,6 +48,9 @@ GPU_times_scale = [[0.126336,  0.118624, 0.110122],
                     [2.64478,  2.64655,  2.63257]]
 GPU_ave = np.mean(GPU_times_scale, axis=1)
 GPU_std = np.std(GPU_times_scale, axis=1)
+print(GPU_ave)
+print(GPU_std)
+print(' ')
 
 CPU_times_scale = [[0.0029649,  0.0020795, 0.0030308],
                     [0.0153262, 0.0168823, 0.0156866],
@@ -54,6 +59,9 @@ CPU_times_scale = [[0.0029649,  0.0020795, 0.0030308],
                     [14.4423,   14.4611,   14.4998]]
 CPU_ave = np.mean(CPU_times_scale, axis=1)
 CPU_std = np.std(CPU_times_scale, axis=1)
+print(CPU_ave)
+print(CPU_std)
+print(' ')
 
 seq_times_scale = [[0.0135734, 0.0122912, 0.0113504],
                     [0.103968,  0.120809,  0.103222],
@@ -62,6 +70,9 @@ seq_times_scale = [[0.0135734, 0.0122912, 0.0113504],
                     [98.1794,   98.1469,   98.1365]]
 seq_ave = np.mean(seq_times_scale, axis=1)
 seq_std = np.std(seq_times_scale, axis=1)
+print(seq_ave)
+print(seq_std)
+print(' ')
 
 num_points = [1000, 10000, 100000, 1000000, 10000000]
 
@@ -75,4 +86,14 @@ plt.legend(loc='upper left')
 plt.xlabel('Number of points')
 plt.ylabel('Time [s]')
 plt.savefig('plot_time.png')
+plt.close()
+
+
+fig = plt.figure(frameon=True)
+ax = plt.gca()
+plt.plot(num_points, seq_ave, label='Sequential')
+plt.xscale('log')
+plt.xlabel('Number of points')
+plt.ylabel('Time [s]')
+plt.savefig('plot_time_seq.png')
 plt.close()
