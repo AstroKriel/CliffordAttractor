@@ -48,17 +48,17 @@ int main() {
     std::cout << "\n";
 
     // define number of clifford points
-    const int NUM_POINTS = 1e7;
+    const int NUM_POINTS = 1e6;
     // define the resolution of the grid domain (number of matrix rows/columns)
     const int SIZE_MATRIX = 1e3;
     // choose which implementations to check
-    const bool run_GPU = false;
+    const bool run_GPU = true;
     const bool run_CPU = true;
-    const bool run_SEQ = false;
+    const bool run_SEQ = true;
     // choose if clifford points should be saved
-    const bool save_points = false;
+    const bool save_points = true;
     // choose if density maps should be saved
-    const bool save_density = false;
+    const bool save_density = true;
 
     //======================================================
     // ALLOCATE SPACE FOR VARIABLES ON HOST
