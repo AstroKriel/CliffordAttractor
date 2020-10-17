@@ -15,8 +15,8 @@ def plotDensity(data_folder, filepath):
     ax.set_axis_off()
     fig.add_axes(ax)
     ## load data
-    file_num = filepath.split('_density_')[1].split('.txt')[0]
-    print('\t> Loading density data set: ' + file_num)
+    file_num = filepath.split('_density_gpu_')[1].split('_')[0]
+    print('\t> Loading density data set: ' + file_num + '...')
     with open((data_folder + '\\' + filepath), 'r') as f:
         A = [[int(num) for num in line.split(', ')] for line in f]
     ## plot and save image with desired aspect ratio 
@@ -38,11 +38,11 @@ if __name__ == '__main__':
             filename.startswith("data_density") and filename.__contains__(str_method) and filename.endswith(".txt")])
         print('There are a total of ' + str(len(filepaths_density_data)) + ' ' + str_method + ' data files.')
         ## load and plot density data in parallel
-        pool = mp.Pool(processes=8)
+        pool = mp.Pool()
         results = [pool.apply_async(plotDensity, args=(data_folder, filepath,)) for filepath in filepaths_density_data]
         results = [p.get() for p in results] ## need to extract info for parallel process to run properly
         print(' ')
     ## animate plots
-    os.system('ffmpeg -start_number 0 -i .\images\density_%i*.png' + 
+    os.system('ffmpeg -start_number 0 -i .\images\density_%d.png' + 
                 ' -vb 40M -framerate 40 -vf scale=1440:-1 -vcodec mpeg4 ani_clifford_attractor.mp4')
 

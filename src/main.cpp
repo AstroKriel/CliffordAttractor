@@ -49,7 +49,7 @@ int main() {
     std::cout << "\n";
 
     // define number of clifford points
-    const int NUM_POINTS = 1e6;
+    const int NUM_POINTS = 3e6;
     // define the resolution of the grid domain (number of matrix rows/columns)
     const int SIZE_MATRIX = 1e3;
     // choose which implementations to check
@@ -95,9 +95,9 @@ int main() {
     struct Pair x_range, y_range;
     std::stringstream stream_iter, stream_a, stream_b, stream_c, stream_d;
     // define the parameter space
-    double params[4] = {1.5, -1.8, -1.6, -0.9};
+    double params[4] = {-2.24, -2.95, 1.27, 0};
     // define the number of loops to iterate over
-    int max_iter = 100; 
+    int max_iter = 300; 
     for (int iter = 0; iter<max_iter; iter++) {
         std::cout << (100*(double)iter/(double)max_iter) << "% complete...\n";
 
@@ -106,7 +106,7 @@ int main() {
         //======================================================
         // randomly increment one of the 4 parameters: a, b, c, d
         if (iter % 10 == 0) { rand_int = rand() % 4; } // generate random number in [0, 3]
-        params[1] += 0.007;
+        params[3] += 0.007;
         // save parameter values
         stream_iter << std::fixed << std::setprecision(0) << iter;
         stream_a << std::fixed << std::setprecision(3) << params[0];
