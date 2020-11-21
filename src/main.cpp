@@ -49,7 +49,7 @@ int main() {
     std::cout << "\n";
 
     // define number of clifford points
-    const int NUM_POINTS = 3e6;
+    const int NUM_POINTS = 5e7;
     // define the resolution of the grid domain (number of matrix rows/columns)
     const int SIZE_MATRIX = 1e3;
     // choose which implementations to check
@@ -95,7 +95,7 @@ int main() {
     struct Pair x_range, y_range;
     std::stringstream stream_iter, stream_a, stream_b, stream_c, stream_d;
     // define the parameter space
-    double params[4] = {-2.24, -2.95, 1.27, 0};
+    double params[4] = {-1.8, -2.0, -0.5, +0.8};
     // define the number of loops to iterate over
     int max_iter = 300; 
     for (int iter = 0; iter<max_iter; iter++) {
@@ -105,7 +105,7 @@ int main() {
         // PREPARE PARAMETER NAME
         //======================================================
         // randomly increment one of the 4 parameters: a, b, c, d
-        if (iter % 10 == 0) { rand_int = rand() % 4; } // generate random number in [0, 3]
+        // if (iter % 10 == 0) { rand_int = rand() % 4; } // generate random number in [0, 3]
         params[3] += 0.007;
         // save parameter values
         stream_iter << std::fixed << std::setprecision(0) << iter;
@@ -114,7 +114,7 @@ int main() {
         stream_c << std::fixed << std::setprecision(3) << params[2];
         stream_d << std::fixed << std::setprecision(3) << params[3];
         // create parameter set name
-        std::cout << "Analysing parameter set: " << "a = " << params[0] << ", b = " << params[1] << ", c = " << params[2] << ", d = " << params[3] << ".\n";
+        std::cout << "Analysing parameter set: " << "a = " << params[0] << ", b = " << params[1] << ", c = " << params[2] << ", d = " << params[3];
         std::string param_set_string = stream_iter.str() + "_a="+stream_a.str() + "_b="+stream_b.str() + "_c="+stream_c.str() + "_d="+stream_d.str();
         // reset string streams
         stream_iter.str(std::string());

@@ -1,0 +1,8 @@
+Top Hotspots
+    Function	Module	CPU Time
+    calcDensity_CPU$omp$1	program.exe	75.559s
+    calcCliffordPoints	program.exe	1.125s
+    vcomp_atomic_add_i4	VCOMP140.DLL	0.705s
+    sin	program.exe	0.623s
+    cos	program.exe	0.603s
+    [Others]	N/A*	1.373s

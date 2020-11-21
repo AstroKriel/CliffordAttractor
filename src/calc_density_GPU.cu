@@ -1,31 +1,24 @@
 #include "calc_density_GPU.cuh"
 
+#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+
 // compute clifford attractor points via GPU
 __global__
 void calcDensity_GPU(double x_min, double x_max, double y_min, double y_max, 
                     double* x, double* y, int N, int M, int* A) {
     int point_id = blockDim.x*blockIdx.x + threadIdx.x;
-    int tmp_row = -1;
     int tmp_col = -1;
-    double tmp_x, tmp_y, cell_width, cell_height;
+    int tmp_row = -1;
+    double cell_width, cell_height;
     if (point_id < N) {
-        // save point coordinate
-        tmp_x = x[point_id];
-        tmp_y = y[point_id];
-        // save width of cell
+        // save dimensions of cell
         cell_width = (x_max - x_min)/(double)M;
         cell_height = (y_max - y_min)/(double)M;
         // find the cell in which the point falls
-        for (int i = 1; i < M; i++) {
-            // check if point falls in cell's x-range
-            if ((x_min+(double)i*cell_width <= tmp_x) && (tmp_x < x_min+(double)(i+1)*cell_width)) { tmp_col = i; }
-            // check if point falls in cell's y-range
-            if ((y_min+(double)i*cell_height <= tmp_y) && (tmp_y < y_min+(double)(i+1)*cell_height)) { tmp_row = i; }
-            // check if the cell has been found
-            if ((tmp_row > 0) && (tmp_col > 0)) { break; }
-        }
+        tmp_col = MIN((x[point_id] - x_min)/cell_width, M-1);
+        tmp_row = MIN((y[point_id] - y_min)/cell_height, M-1);
         // atomically increment cell count
-        if (tmp_col > 0 && tmp_row > 0) { atomicAdd(&A[tmp_row*M + tmp_col], 1); }
+        if (tmp_col >= 0 && tmp_row >= 0) { atomicAdd(&A[tmp_row*M + tmp_col], 1); }
     }
 }
 
